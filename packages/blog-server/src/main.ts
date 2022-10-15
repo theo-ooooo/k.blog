@@ -1,12 +1,17 @@
 import express from 'express';
-const app = express();
 import * as dotenv from 'dotenv';
+import * as cors from 'cors';
+import apiV1Routes from './routes/index';
+
 dotenv.config();
 const port = +process.env.PORT! || 8888;
 
-app.get('/', (_req: express.Request, res: express.Response) => {
-  res.json({ result: true });
-});
+const app = express();
+
+app.use(express.json());
+app.use(cors.default());
+
+app.use('/api/v1', apiV1Routes);
 
 app.listen(port, () => {
   console.log(`Blog app listening on port ${port}`);
