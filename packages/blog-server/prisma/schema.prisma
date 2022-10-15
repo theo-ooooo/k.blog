@@ -9,3 +9,65 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  nickname  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+
+  @@map("users")
+}
+
+model Post {
+  id                 Int                 @id @default(autoincrement())
+  slug               String              @unique
+  title              String
+  content            String              @db.LongText
+  display            Int                 @default(0) @db.TinyInt
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int
+  postThumbnailImage PostThumbnailImage? @relation(fields: [thumbnailId], references: [id], onDelete: Cascade)
+  thumbnailId        Int
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  tags               PostTag[]
+
+  @@map("posts")
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  posts     PostTag[]
+
+  @@map("tags")
+}
+
+model PostTag {
+  id        Int      @id @default(autoincrement())
+  post      Post     @relation(fields: [postId], references: [id])
+  tag       Tag      @relation(fields: [tagId], references: [id])
+  postId    Int
+  tagId     Int
+  createdAt DateTime @default(now())
+
+  @@map("postTags")
+}
+
+model PostThumbnailImage {
+  id       Int     @id @default(autoincrement())
+  imageId  String  @unique
+  original String? @db.Text
+  webp     String? @db.Text
+  jpeg     String? @db.Text
+  bucket   String
+  Post     Post[]
+
+  @@map("postThumbnailImage")
+}
