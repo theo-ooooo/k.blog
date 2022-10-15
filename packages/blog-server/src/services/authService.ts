@@ -1,5 +1,7 @@
 import db from '../libs/db';
 import bcrypt from 'bcrypt';
+import customError from '../libs/errors/customError';
+import { StatusCodes } from 'http-status-codes';
 
 const SALT_ROUNDS = 10;
 
@@ -21,7 +23,7 @@ const register = async ({ email, password, nickname }: userParams) => {
   const exists = await getUserByEmail({ email });
 
   if (exists) {
-    throw new Error(`user exists`);
+    throw new customError(StatusCodes.UNAUTHORIZED, `user exists`);
   }
   const hash = await bcrypt.hash(password, SALT_ROUNDS);
   const user = await createUser({ email, password: hash, nickname });
