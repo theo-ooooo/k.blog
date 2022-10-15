@@ -7,8 +7,8 @@ const register = async (req: Request, res: Response) => {
     const user = await authService.register({ email, password, nickname });
     res.status(201).json({ result: true, user });
   } catch (error: any) {
-//TODO: 에러메세지 확인. 안나옴.
-    res.status(500).json({ result: false, error } });
+    //TODO: 에러메세지 확인. 안나옴.
+    res.status(500).json({ result: false, error });
   }
 };
 
