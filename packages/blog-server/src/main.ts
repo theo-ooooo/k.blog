@@ -1,6 +1,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import * as cors from 'cors';
+import cookieParser from 'cookie-parser';
 import apiV1Routes from './routes/index';
 import handleError from './middlewares/handleError';
 
@@ -10,6 +11,7 @@ const port = +process.env.PORT! || 8888;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors.default());
 
 app.use('/api/v1', apiV1Routes);

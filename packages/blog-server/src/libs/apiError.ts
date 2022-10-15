@@ -1,4 +1,4 @@
-class customError extends Error {
+class apiError extends Error {
   statusCode: number;
   result: boolean;
   constructor(statusCode: number, message: string) {
@@ -10,4 +10,4 @@ class customError extends Error {
   }
 }
 
-export default customError;
+export default apiError;
