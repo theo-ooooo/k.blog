@@ -26,4 +26,12 @@ const login = asyncWrapper(async (req: Request, res: Response) => {
     .json({ result: true, tokens: authResult.tokens });
 });
 
-export default { register, login };
+const logout = (req: Request, res: Response) => {
+  res
+    .clearCookie('accessToken')
+    .clearCookie('refreshToken')
+    .status(200)
+    .json({ result: true, message: '로그아웃 되었습니다.' });
+};
+
+export default { register, login, logout };
