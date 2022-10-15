@@ -6,7 +6,7 @@ const handleError = (err: any, req: Request, res: Response, next: NextFunction) 
   let error: { statusCode: number; result: boolean; message: string } = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     result: false,
-    message: err.message || 'Internal server error',
+    message: err.message || StatusCodes[StatusCodes.INTERNAL_SERVER_ERROR],
   };
 
   if (!(err instanceof customError)) {
