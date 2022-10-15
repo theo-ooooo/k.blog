@@ -4,6 +4,7 @@ import * as cors from 'cors';
 import cookieParser from 'cookie-parser';
 import apiV1Routes from './routes/index';
 import handleError from './middlewares/handleError';
+import apiError from './libs/apiError';
 
 dotenv.config();
 const port = +process.env.PORT! || 8888;
@@ -15,6 +16,10 @@ app.use(cookieParser());
 app.use(cors.default());
 
 app.use('/api/v1', apiV1Routes);
+
+app.use(() => {
+  throw new apiError(404, `not found`);
+});
 
 app.use(handleError);
 
