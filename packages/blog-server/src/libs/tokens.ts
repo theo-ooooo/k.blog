@@ -8,6 +8,7 @@ interface tokenPayload {
   type: string;
   userId: number;
   email: string;
+  nickname: string | null;
 }
 
 export const generateToken = (payload: tokenPayload) => {

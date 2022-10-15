@@ -44,8 +44,18 @@ const login = async ({ email, password }: userParams) => {
     throw new apiError(StatusCodes.UNAUTHORIZED, `password`);
   }
 
-  const accessToken = generateToken({ type: 'accessToken', userId: user.id, email: user.email });
-  const refreshToken = generateToken({ type: 'refreshToken', userId: user.id, email: user.email });
+  const accessToken = generateToken({
+    type: 'accessToken',
+    userId: user.id,
+    email: user.email,
+    nickname: user.nickname,
+  });
+  const refreshToken = generateToken({
+    type: 'refreshToken',
+    userId: user.id,
+    email: user.email,
+    nickname: user.nickname,
+  });
 
   return { user, tokens: { accessToken, refreshToken } };
 };

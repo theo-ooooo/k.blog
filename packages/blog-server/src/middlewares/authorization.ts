@@ -13,6 +13,7 @@ const authorization = (req: Request, res: Response, next: NextFunction) => {
   req.user = {
     userId: decoded.userId,
     email: decoded.email,
+    nickname: decoded.nickname,
   };
   next();
 };
@@ -24,6 +25,7 @@ declare module 'express' {
     user?: {
       userId?: number;
       email?: string;
+      nickname?: string;
     } | null;
   }
 }
