@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --inspect --watch -- ./src/main.ts"
+    "dev": "ts-node-dev  --watch -- ./src/main.ts"
   },
   "keywords": [],
   "author": "",

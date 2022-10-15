@@ -1,12 +1,15 @@
 import db from '../libs/db';
+import bcrypt from 'bcrypt';
 
-interface user {
+const SALT_ROUNDS = 10;
+
+interface userParams {
   email: string;
   password: string;
   nickname?: string;
 }
 
-const createUser = async ({ email, password, nickname }: user) => {
+const createUser = async ({ email, password, nickname }: userParams) => {
   return await db.user.create({ data: { email, password, nickname } });
 };
 
@@ -14,4 +17,15 @@ const getUserByEmail = async ({ email }: { email: string }) => {
   return await db.user.findUnique({ where: { email } });
 };
 
-export default { createUser, getUserByEmail };
+const register = async ({ email, password, nickname }: userParams) => {
+  const exists = await getUserByEmail({ email });
+
+  if (exists) {
+    throw new Error(`user exists`);
+  }
+  const hash = await bcrypt.hash(password, SALT_ROUNDS);
+  const user = await createUser({ email, password: hash, nickname });
+  return { user };
+};
+
+export default { register };
