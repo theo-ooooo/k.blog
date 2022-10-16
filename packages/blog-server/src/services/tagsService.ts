@@ -9,7 +9,7 @@ interface tagParams {
 }
 
 const getTagList = async () => {
-  const tags = await db.tag.findMany({ where: { display: 1 } });
+  const tags = await db.tag.findMany({ where: { display: 1 }, orderBy: { id: 'desc' } });
 
   return { tags };
 };
