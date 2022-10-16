@@ -18,16 +18,16 @@ export const generateToken = (payload: tokenPayload) => {
     });
     return token;
   } catch (e: any) {
-    throw new apiError(StatusCodes.FORBIDDEN, e.message as string);
+    throw new apiError(StatusCodes.FORBIDDEN, e.message);
   }
 };
 
-export const validationToken = <T>(token: string) => {
+export const validationToken = (token: string) => {
   try {
     let valid: any;
     valid = jwt.verify(token, JWT_SECRET);
     return valid;
   } catch (e: any) {
-    throw new apiError(StatusCodes.FORBIDDEN, e.message as string);
+    throw new apiError(StatusCodes.FORBIDDEN, e.message);
   }
 };
