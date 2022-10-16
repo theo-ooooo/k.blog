@@ -28,7 +28,7 @@ model Post {
   slug               String              @unique
   title              String
   content            String              @db.LongText
-  display            Int                 @default(0) @db.TinyInt
+  display            Int                 @default(1) @db.TinyInt
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
   postThumbnailImage PostThumbnailImage? @relation(fields: [thumbnailId], references: [id], onDelete: Cascade)
@@ -37,16 +37,19 @@ model Post {
   updatedAt          DateTime            @updatedAt
   tags               PostTag[]
 
+  @@index([display])
   @@map("posts")
 }
 
 model Tag {
   id        Int       @id @default(autoincrement())
   name      String    @unique
+  display   Int       @default(1) @db.TinyInt
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   posts     PostTag[]
 
+  @@index([display])
   @@map("tags")
 }
 

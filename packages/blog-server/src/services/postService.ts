@@ -3,6 +3,9 @@ import db from '../libs/db';
 const getPostList = async ({ lastId }: { lastId?: number }) => {
   const postLimit = 10;
   const posts = await db.post.findMany({
+    where: {
+      display: 1,
+    },
     take: postLimit + 1,
     skip: lastId ? 1 : 0,
     ...(lastId && { cursor: { id: lastId } }),
