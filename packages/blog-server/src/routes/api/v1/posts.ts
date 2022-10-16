@@ -1,7 +1,7 @@
 import express from 'express';
-import postController from '../../../controllers/postController';
+import postsController from '../../../controllers/postsController';
 const router = express.Router();
 
-router.post('/list', postController.list);
+router.post('/list', postsController.list);
 
 export default router;
