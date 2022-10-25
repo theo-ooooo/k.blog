@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { asyncWrapper } from '../middlewares/asyncWrapper';
-import postsService from '../services/postsService';
+import postsService from '../services/post.service';
 
 const list = asyncWrapper(async (req: Request, res: Response) => {
   const postResult = await postsService.getPostList(req.body);

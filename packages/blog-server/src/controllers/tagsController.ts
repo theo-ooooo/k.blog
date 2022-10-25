@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { asyncWrapper } from '../middlewares/asyncWrapper';
-import tagsService from '../services/tagsService';
+import tagsService from '../services/tag.service';
 
 const create = asyncWrapper(async (req: Request, res: Response) => {
   const tagsResult = await tagsService.createTag(req.body);
