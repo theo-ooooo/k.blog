@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { asyncWrapper } from '../middlewares/asyncWrapper';
-import authService from '../services/authService';
+import authService from '../services/auth.service';
 
 const register = asyncWrapper(async (req: Request, res: Response) => {
   const { email, password, nickname } = req.body;
