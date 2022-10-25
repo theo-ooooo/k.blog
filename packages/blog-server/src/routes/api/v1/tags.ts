@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import tagsController from '../../../controllers/tagsController';
+import tagsController from '../../../controllers/tag.controller';
 import authorization from '../../../middlewares/authorization';
 import { formValidationResult } from '../../../middlewares/common';
 const router = express.Router();

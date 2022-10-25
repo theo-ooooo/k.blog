@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import authController from '../../../controllers/authController';
+import authController from '../../../controllers/auth.controller';
 import authorization from '../../../middlewares/authorization';
 import { formValidationResult } from '../../../middlewares/common';
 
