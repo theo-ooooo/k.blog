@@ -4,6 +4,15 @@ import apiError from '../libs/apiError';
 import db from '../libs/db';
 import _ from 'lodash';
 
+interface postParams {
+  postId: number;
+  title: string;
+  content: string;
+  tags?: number[];
+  display: number;
+  thumbnailId?: number;
+}
+
 const postService = {
   async getPostList({ lastId }: { lastId?: number }) {
     const postLimit = 10;
@@ -61,16 +70,7 @@ const postService = {
     await db.postTag.deleteMany({ where: { postId } });
   },
 
-  async createPost(
-    userId: number,
-    {
-      title,
-      content,
-      tags,
-      display,
-      thumbnailId,
-    }: { title: string; content: string; tags?: number[]; display: number; thumbnailId?: number }
-  ) {
+  async createPost(userId: number, { title, content, tags, display, thumbnailId }: postParams) {
     const slugTitle = await this.createSlug(title);
     const post = await db.post.create({
       data: {
@@ -90,21 +90,7 @@ const postService = {
 
   async updatePost(
     userId: number,
-    {
-      postId,
-      title,
-      content,
-      tags,
-      display,
-      thumbnailId,
-    }: {
-      postId: number;
-      title: string;
-      content: string;
-      tags?: number[];
-      display: number;
-      thumbnailId?: number;
-    }
+    { postId, title, content, tags, display, thumbnailId }: postParams
   ) {
     const exists = await db.post.findUnique({ where: { id: postId }, include: { user: true } });
     if (!exists) {
