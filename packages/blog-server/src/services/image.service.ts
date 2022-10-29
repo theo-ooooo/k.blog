@@ -62,7 +62,7 @@ const imageService = {
 
     const key = `${process.env.ENVIRONMENT}/thumbnail/${imageId}`;
     const webpKey = key + '.webp';
-    const jpegKey = key + '.jepg';
+    const jpegKey = key + '.jpeg';
 
     // 업로드
     await Promise.all([
