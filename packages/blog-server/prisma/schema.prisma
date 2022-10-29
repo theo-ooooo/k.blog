@@ -17,7 +17,7 @@ model User {
   nickname  String?
   avatorUrl String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
   posts     Post[]
 
   @@map("users")
@@ -32,9 +32,9 @@ model Post {
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
   postThumbnailImage PostThumbnailImage? @relation(fields: [thumbnailId], references: [id], onDelete: Cascade)
-  thumbnailId        Int
+  thumbnailId        Int?
   createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
+  updatedAt          DateTime?          @updatedAt
   tags               PostTag[]
 
   @@index([display])
@@ -46,7 +46,7 @@ model Tag {
   name      String    @unique
   display   Int       @default(1) @db.TinyInt
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime?  @updatedAt
   posts     PostTag[]
 
   @@index([display])
@@ -54,7 +54,6 @@ model Tag {
 }
 
 model PostTag {
-  id        Int      @id @default(autoincrement())
   post      Post     @relation(fields: [postId], references: [id])
   tag       Tag      @relation(fields: [tagId], references: [id])
   postId    Int
@@ -62,6 +61,7 @@ model PostTag {
   createdAt DateTime @default(now())
 
   @@map("postTags")
+  @@id([postId, tagId])
 }
 
 model PostThumbnailImage {
