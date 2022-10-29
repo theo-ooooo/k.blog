@@ -70,7 +70,9 @@ model PostThumbnailImage {
   original String? @db.Text
   webp     String? @db.Text
   jpeg     String? @db.Text
-  bucket   String
+  originalBucket   String
+  webpBucket   String
+  jpegBucket   String
   Post     Post[]
 
   @@map("postThumbnailImage")
