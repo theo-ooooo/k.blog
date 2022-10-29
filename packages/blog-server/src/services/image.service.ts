@@ -29,6 +29,12 @@ const imageService = {
       .promise();
   },
 
+  async deleteFromS3(bucket: string, key: string) {
+    try {
+      await s3.deleteObject({ Bucket: bucket, Key: key }).promise();
+    } catch (e) {}
+  },
+
   async convertToJpeg(buffer: Buffer, source: string) {
     await sharp(buffer).jpeg({ quality: 85 }).toFile(source);
     return source;
@@ -86,6 +92,10 @@ const imageService = {
 
     return thumbnail;
   },
+
+  // TODO: 어떻게 할지 추후 생각
+  //   async thumbnailImageDelete(imageId: string) {
+  //   }
 };
 
 export default imageService;
