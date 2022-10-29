@@ -17,6 +17,7 @@ const TEMPORARY_PATH = os.tmpdir();
 const originalBucket = process.env.IMAGE_ORIGINAL_BUCKET!;
 const webpBucket = process.env.IMAGE_WEBP_BUCKET!;
 const jpegBucket = process.env.IMAGE_JPEG_BUCKET!;
+const thumbnalImageCdn = process.env.THUMBNAIL_IMAGE_CDN_URL;
 
 const imageService = {
   createImageId() {
@@ -78,7 +79,7 @@ const imageService = {
       fs.unlinkSync(jpegSource),
     ]);
 
-    const thumbnail = await db.postThumbnailImage.create({
+    const { id: thumbnailId, webp } = await db.postThumbnailImage.create({
       data: {
         imageId,
         original: key,
@@ -90,7 +91,7 @@ const imageService = {
       },
     });
 
-    return thumbnail;
+    return { thumbnailId, imageId, path: `${thumbnalImageCdn}/${webp}` };
   },
 
   // TODO: 어떻게 할지 추후 생각
