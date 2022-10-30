@@ -79,7 +79,7 @@ const imageService = {
       fs.unlinkSync(jpegSource),
     ]);
 
-    const { id: thumbnailId, webp } = await db.postThumbnailImage.create({
+    const { id: thumbnailId } = await db.postThumbnailImage.create({
       data: {
         imageId,
         original: key,
@@ -91,7 +91,7 @@ const imageService = {
       },
     });
 
-    return { thumbnailId, imageId, path: `${thumbnalImageCdn}/${webp}` };
+    return { thumbnailId, imageId, path: `${thumbnalImageCdn}/${webpKey}` };
   },
 
   // TODO: 어떻게 할지 추후 생각
