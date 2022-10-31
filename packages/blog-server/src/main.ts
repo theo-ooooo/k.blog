@@ -17,6 +17,10 @@ app.use(cors.default());
 
 app.use('/api/v1', apiV1Routes);
 
+app.use('/health', (req: express.Request, res: express.Response) => {
+  res.json({ result: true });
+});
+
 app.use(() => {
   throw new apiError(404, `not found`);
 });
