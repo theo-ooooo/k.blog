@@ -1,4 +1,4 @@
-import { Post, User } from '@prisma/client';
+import { Post } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import apiError from '../libs/apiError';
 import db from '../libs/db';
