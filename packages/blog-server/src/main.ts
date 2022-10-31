@@ -7,7 +7,7 @@ import handleError from './middlewares/handleError';
 import apiError from './libs/apiError';
 
 dotenv.config();
-const port = +process.env.PORT! || 8888;
+const port = +process.env.PORT! || 8080;
 
 const app = express();
 
