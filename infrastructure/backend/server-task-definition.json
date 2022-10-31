@@ -9,15 +9,36 @@
       "entryPoint": null,
       "portMappings": [
         {
-          "hostPort": 0,
+          "hostPort": 8080,
           "protocol": "tcp",
-          "containerPort": 80
+          "containerPort": 8080
         }
       ],
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "IMAGE_JPEG_BUCKET",
+          "value": "blog-kwkang-dev-jpeg"
+        },
+        {
+          "name": "IMAGE_ORIGINAL_BUCKET",
+          "value": "blog-kwkang-dev-original"
+        },
+        {
+          "name": "IMAGE_WEBP_BUCKET",
+          "value": "blog-kwkang-dev-webp"
+        },
+        {
+          "name": "THUMBNAIL_IMAGE_CDN_URL",
+          "value": "https://images.kwkang.dev"
+        }
+      ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
@@ -25,7 +46,7 @@
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
-      "memory": 128,
+      "memory": 512,
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
@@ -50,11 +71,11 @@
     }
   ],
   "placementConstraints": [],
-  "memory": null,
+  "memory": "512",
   "taskRoleArn": "arn:aws:iam::523954577807:role/ecsTaskExecutionRole",
   "compatibilities": ["EXTERNAL", "EC2"],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:523954577807:task-definition/blog-definition:7",
-  "family": "blog-definition",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:523954577807:task-definition/server-task:1",
+  "family": "server-task",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -77,10 +98,10 @@
   ],
   "pidMode": null,
   "requiresCompatibilities": ["EC2"],
-  "networkMode": "bridge",
+  "networkMode": null,
   "runtimePlatform": null,
-  "cpu": null,
-  "revision": 7,
+  "cpu": "256",
+  "revision": 1,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
