@@ -58,7 +58,7 @@ jobs:
         working-directory: packages/blog-server
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: blog
+          ECR_REPOSITORY: kblog
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Build a docker container and
