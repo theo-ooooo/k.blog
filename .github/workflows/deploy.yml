@@ -44,7 +44,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        - name: Setting aws credentials
+      - name: Setting aws credentials
         run: |
           echo "[kblog]
           aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}
