@@ -57,7 +57,12 @@
       "dnsServers": null,
       "mountPoints": [],
       "workingDirectory": null,
-      "secrets": null,
+      "secrets": [
+        {
+          "valueForm": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:prod/kblog/mariadb-FCtaiB",
+          "name": "DATEBASE_URL"
+        }
+      ],
       "dockerSecurityOptions": null,
       "memory": 480,
       "memoryReservation": null,
