@@ -7,7 +7,7 @@
     "dev": "nodemon --watch ./src --exec \"ts-node-esm --transpileOnly ./src/main.ts | pino-pretty\" -e ts",
     "build": "tsc",
     "start:pm2": "pm2-runtime start deploy.config.json",
-    "prisma:up": "npx prisma db push && npx prisma generate",
+    "prisma:up": "npx prisma db push",
     "start:prod": "yarn prisma:up && yarn start:pm2"
   },
   "keywords": [],

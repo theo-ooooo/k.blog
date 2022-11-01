@@ -8,9 +8,6 @@ import apiError from './libs/apiError';
 
 dotenv.config();
 
-console.log('logging env databaseUrl', process.env.DATABASE_URL);
-console.log('logging env PORT', process.env.PORT);
-
 const port = +process.env.PORT! || 8080;
 
 const app = express();
