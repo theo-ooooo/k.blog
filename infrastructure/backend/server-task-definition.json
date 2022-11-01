@@ -59,11 +59,11 @@
       "workingDirectory": null,
       "secrets": [
         {
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:prod/kblog/db-KcWFFr",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:kblog-backend/database_url-hDloeZ",
           "name": "DATABASE_URL"
         },
         {
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:prod/blog/jwtSecret-FoZvSj",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:kblog-backend/jwt_secret-n7KqAU",
           "name": "JWT_SECERT"
         }
       ],
