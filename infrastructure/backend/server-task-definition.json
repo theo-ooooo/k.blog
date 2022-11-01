@@ -61,6 +61,10 @@
         {
           "valueForm": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:prod/kblog/mariadb-FCtaiB",
           "name": "DATEBASE_URL"
+        },
+        {
+          "valueForm": "arn:aws:secretsmanager:ap-northeast-2:523954577807:secret:prod/blog/jwtSecret-FoZvSj",
+          "name": "JWT_SECERT"
         }
       ],
       "dockerSecurityOptions": null,

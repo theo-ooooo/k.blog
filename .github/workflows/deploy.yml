@@ -42,6 +42,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setting .env
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          cat .env
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
