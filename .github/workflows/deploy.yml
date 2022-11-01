@@ -32,7 +32,7 @@ on:
       - main
     paths:
       - "packages/blog-server/**"
-      = ".github/workflows/**"
+      - ".github/workflows/deploy.yml"
 
 jobs:
   deploy:
