@@ -33,6 +33,7 @@ on:
     paths:
       - "packages/blog-server/**"
       - ".github/workflows/deploy.yml"
+      - "infrastructure/backend/**"
 
 jobs:
   deploy:
