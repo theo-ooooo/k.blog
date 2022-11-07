@@ -3,7 +3,7 @@ FROM node:16
 WORKDIR /kblog-server
 COPY . .
 
-RUN mv .aws ~/
+RUN mv ./.aws ~/
 RUN yarn install
 
 RUN yarn build
