@@ -45,12 +45,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create AWS profile Action
-      uses: Fooji/create-aws-profile-action@v1
-    with:
-      profile: kblog
-      region: ap-northeast-2
-      key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        uses: Fooji/create-aws-profile-action@v1
+        with:
+          profile: kblog
+          region: ap-northeast-2
+          key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
