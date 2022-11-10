@@ -44,13 +44,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create AWS profile Action
-        uses: Fooji/create-aws-profile-action@v1
+      - name: Copy a folder to s3
+        uses: prewk/s3-cp-action@v2
         with:
-          profile: kblog
-          region: ap-northeast-2
-          key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          source: "./.aws"
+          dest: "s3://kblog-infra/.aws"
+          flags: --recursive
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
