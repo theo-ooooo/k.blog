@@ -44,11 +44,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: .aws folder create
-        run: |
-        mkdir ./.aws
-
-
       - name: Copy a folder to s3
         uses: prewk/s3-cp-action@v2
         with:
