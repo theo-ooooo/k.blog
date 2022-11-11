@@ -52,6 +52,7 @@ jobs:
           source: "s3://kblog-infra/.aws"
           dest: "./.aws"
           aws_region: "ap-northeast-2"
+          flags: --recursive
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
