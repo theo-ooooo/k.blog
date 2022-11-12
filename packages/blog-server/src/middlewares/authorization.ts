@@ -4,7 +4,8 @@ import apiError from '../libs/apiError';
 import { validationToken } from '../libs/tokens';
 
 const authorization = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies?.accessToken;
+  const token = req.cookies['access_token'];
+
   if (!token) {
     throw new apiError(StatusCodes.FORBIDDEN, 'authorization');
   }

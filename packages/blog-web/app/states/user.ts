@@ -1,0 +1,15 @@
+import { sangte, useSangteValue, useSetSangte } from "sangte";
+import { User } from "~/lib/api/types";
+
+const initialState = null as User | null;
+export const userState = sangte(initialState, { global: true });
+
+export function useUser() {
+  const user = useSangteValue(userState);
+  return user;
+}
+
+export function useSetUser() {
+  const setUser = useSetSangte(userState);
+  return setUser;
+}

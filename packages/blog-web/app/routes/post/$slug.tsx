@@ -1,10 +1,11 @@
-import PostCardList from "~/components/home/PostCardList";
 import BasicLayout from "~/components/layouts/BasicLayout";
 
-export default function Index() {
+function post() {
   return (
     <BasicLayout>
-      <PostCardList />
+      <div>1</div>
     </BasicLayout>
   );
 }
+
+export default post;
