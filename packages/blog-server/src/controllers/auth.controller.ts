@@ -23,7 +23,15 @@ const authController = {
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
         path: '/',
       })
-      .json({ result: true, tokens: authResult.tokens });
+      .json({
+        result: true,
+        user: {
+          nickanme: authResult.user.nickname,
+          avatorUrl: authResult.user.avatorUrl,
+          userId: authResult.user.id,
+        },
+        tokens: authResult.tokens,
+      });
   }),
   logout: (req: Request, res: Response) => {
     res
