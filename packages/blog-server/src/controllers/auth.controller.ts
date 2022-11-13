@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { clearCookie, setTokenCookies } from '../libs/cookies';
 import { asyncWrapper } from '../middlewares/asyncWrapper';
 import authService from '../services/auth.service';
 
@@ -11,18 +12,7 @@ const authController = {
   login: asyncWrapper(async (req: Request, res: Response) => {
     const authResult = await authService.login(req.body);
 
-    res.cookie('access_token', authResult.tokens.accessToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60),
-      path: '/',
-    });
-
-    res.cookie('refresh_token', authResult.tokens.refreshToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      path: '/',
-    });
-
+    setTokenCookies(res, authResult.tokens);
     res.send({
       result: true,
       user: {
@@ -34,10 +24,8 @@ const authController = {
     });
   }),
   logout: (req: Request, res: Response) => {
-    res
-      .clearCookie('access_token')
-      .clearCookie('refresh_token')
-      .send({ result: true, message: '로그아웃 되었습니다.' });
+    clearCookie(res);
+    res.send({ result: true, message: '로그아웃 되었습니다.' });
   },
 };
 
