@@ -20,17 +20,14 @@ export async function logout() {
 
 export async function login(params: AuthParams) {
   // const response = await client.post<AuthResult>("/api/v1/auth/login", params);
-  const response = await fetch(
-    `${process.env.API_BASE_URL}/api/v1/auth/login`,
-    {
-      method: "POST",
-      body: JSON.stringify(params),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    }
-  );
+  const response = await fetch(`${process.env.API_BASE_URL}api/v1/auth/login`, {
+    method: "POST",
+    body: JSON.stringify(params),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
 
   const data = await response.json();
 
