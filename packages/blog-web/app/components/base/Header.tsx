@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <div className="w-[100%] h-[62px] fixed z-[999] flex align-center bg-white border-b">
-      <div className="my-0 mx-auto flex items-center justify-between relative w-[100%] 2xl:w-[1536px] 2xl:justify-center px-[2rem]">
+      <div className="my-0 mx-auto flex items-center justify-between relative w-[100%] 2xl:w-[1536px] px-[2rem]">
         <Logo />
         <div className="flex items-center justify-between">
           <Link to="/search" className="mr-3">
