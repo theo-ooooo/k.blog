@@ -48,13 +48,13 @@ const authService = {
     const accessToken = generateToken({
       type: 'accessToken',
       userId: user.id,
-      email: user.email,
+      avatorUrl: user.avatorUrl,
       nickname: user.nickname,
     });
     const refreshToken = generateToken({
       type: 'refreshToken',
       userId: user.id,
-      email: user.email,
+      avatorUrl: user.avatorUrl,
       nickname: user.nickname,
     });
 

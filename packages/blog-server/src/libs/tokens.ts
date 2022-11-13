@@ -7,8 +7,8 @@ const JWT_SECRET = process.env.JWT_SECRET ?? 'test';
 interface tokenPayload {
   type: string;
   userId: number;
-  email: string;
   nickname: string | null;
+  avatorUrl: string | null;
 }
 
 export const generateToken = (payload: tokenPayload) => {

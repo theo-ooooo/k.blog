@@ -13,8 +13,8 @@ const authorization = (req: Request, res: Response, next: NextFunction) => {
   const decoded = validationToken(token);
   req.user = {
     userId: decoded.userId,
-    email: decoded.email,
     nickname: decoded.nickname,
+    avatorUrl: decoded.avatorUrl,
   };
   next();
 };
@@ -25,8 +25,8 @@ declare module 'express' {
   interface Request {
     user?: {
       userId?: number;
-      email?: string;
       nickname?: string;
+      avatorUrl?: string | null;
     } | null;
   }
 }

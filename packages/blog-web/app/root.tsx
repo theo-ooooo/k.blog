@@ -49,7 +49,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
-  const { user } = useLoaderData<LoaderResult>();
+  const { user, env } = useLoaderData<LoaderResult>();
 
   return (
     <html lang="en">
@@ -58,6 +58,13 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gray-100">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.ENV = ${JSON.stringify(env)}
+          `,
+          }}
+        />
         <SangteProvider
           initialize={({ set }) => {
             set(userState, user);

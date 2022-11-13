@@ -29,8 +29,6 @@ export const action: ActionFunction = async ({ request }) => {
         password,
       });
 
-    console.log(headers);
-
     return json(result, { headers });
   } catch (e: any) {
     throw json(e?.response?.data, { status: e?.response?.status });

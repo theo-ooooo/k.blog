@@ -1,7 +1,7 @@
 import { Form } from "@remix-run/react";
 import { useSubmitLoading } from "~/hooks/useSubmitLoading";
 import { AppError } from "~/lib/error";
-import Button from "../base/Button";
+import Button from "../system/Button";
 import Logo from "../base/Logo";
 import LabelInput from "../system/Labelnput";
 
@@ -40,7 +40,13 @@ function LoginForm({ error }: Props) {
         {error ? (
           <p className="text-red-500 text-center">로그인 실패하였습니다.</p>
         ) : null}
-        <Button type="submit" text="로그인" disabled={isLoading} />
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="bg-slate-400 text-white p-5 rounded-md"
+        >
+          로그인
+        </Button>
       </div>
     </Form>
   );

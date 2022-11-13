@@ -26,7 +26,7 @@ const authController = {
     res.send({
       result: true,
       user: {
-        nickanme: authResult.user.nickname,
+        nickname: authResult.user.nickname,
         avatorUrl: authResult.user.avatorUrl,
         userId: authResult.user.id,
       },
@@ -37,8 +37,7 @@ const authController = {
     res
       .clearCookie('access_token')
       .clearCookie('refresh_token')
-      .status(200)
-      .json({ result: true, message: '로그아웃 되었습니다.' });
+      .send({ result: true, message: '로그아웃 되었습니다.' });
   },
 };
 

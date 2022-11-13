@@ -1,6 +1,6 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import * as cors from 'cors';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import apiV1Routes from './routes/index';
 import handleError from './middlewares/handleError';
@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors.default());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use('/api/v1', apiV1Routes);
 
