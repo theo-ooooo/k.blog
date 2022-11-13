@@ -33,7 +33,7 @@ function LoginForm({ error }: Props) {
         />
         <LabelInput
           label="패스워드"
-          placeholder="이메일을 입력해주세요."
+          placeholder="패스워드를 입력해주세요."
           type="password"
           name="password"
           disabled={isLoading}
@@ -44,7 +44,7 @@ function LoginForm({ error }: Props) {
         <Button
           type="submit"
           disabled={isLoading}
-          className="bg-slate-400 text-white p-3 rounded-md"
+          className="bg-slate-400 text-white p-3 rounded-md disabled:bg-gray-500"
         >
           로그인
         </Button>
