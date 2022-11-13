@@ -29,6 +29,10 @@ export async function login(params: AuthParams) {
     credentials: "include",
   });
 
+  if (!response.ok) {
+    throw new Error(`로그인 실패`);
+  }
+
   const data = await response.json();
 
   return { result: data, headers: response.headers };

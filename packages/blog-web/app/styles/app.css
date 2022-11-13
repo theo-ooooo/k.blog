@@ -765,8 +765,8 @@ video {
   padding: 1rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
+.p-3 {
+  padding: 0.75rem;
 }
 
 .px-4 {
@@ -774,9 +774,9 @@ video {
   padding-right: 1rem;
 }
 
-.px-\[2rem\] {
-  padding-left: 2rem;
-  padding-right: 2rem;
+.px-\[1rem\] {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .px-3 {
@@ -990,15 +990,5 @@ video {
 
   .xl\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1536px) {
-  .\32xl\:w-\[1536px\] {
-    width: 1536px;
-  }
-
-  .\32xl\:justify-center {
-    justify-content: center;
   }
 }

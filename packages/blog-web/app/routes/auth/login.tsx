@@ -31,7 +31,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     return json(result, { headers });
   } catch (e: any) {
-    throw json(e?.response?.data, { status: e?.response?.status });
+    throw json(e);
   }
 };
 
@@ -53,7 +53,5 @@ export default function Login({ error }: Props) {
 
 export function CatchBoundary() {
   const caught = useCatch<ThrownResponse<number, AppError>>();
-  console.log(caught);
-
   return <Login error={caught.data} />;
 }
