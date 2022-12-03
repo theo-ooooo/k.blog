@@ -28,7 +28,7 @@ const authController = {
     res.send({ result: true, message: '로그아웃 되었습니다.' });
   },
   refresh: asyncWrapper(async (req: Request, res: Response) => {
-    const authResult = await authService.refesh(req.cookies.refreshToken);
+    const authResult = await authService.refesh({ refreshToken: req.cookies.refresh_token });
     setTokenCookies(res, authResult.tokens);
     res.send({ result: true, ...authResult });
   }),
