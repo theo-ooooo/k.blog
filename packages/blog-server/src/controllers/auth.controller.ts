@@ -29,7 +29,7 @@ const authController = {
   },
   refresh: asyncWrapper(async (req: Request, res: Response) => {
     const authResult = await authService.refesh(req.cookies.refreshToken);
-
+    setTokenCookies(res, authResult.tokens);
     res.send({ result: true, ...authResult });
   }),
 };
