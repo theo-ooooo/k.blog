@@ -17,8 +17,6 @@ function UserInfo({ nickname, avatorUrl }: Props) {
     setVisible(false);
   };
 
-  console.log(111, nickname);
-
   return (
     <div className="relative flex">
       <Button

@@ -9,12 +9,12 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { SangteProvider } from "sangte";
-import { getMe } from "./lib/api/user";
 import { User } from "./lib/api/types";
 import { userState } from "./states/user";
 
 import styles from "./styles/app.css";
-
+import { setClientCookie } from "./lib/client";
+import { getMyUserInfo } from "./lib/protected";
 interface LoaderResult {
   user: User | null;
   env: {
@@ -30,8 +30,10 @@ export const loader: LoaderFunction = async ({ request }) => {
   };
   if (!cookie) return json({ user: null, env });
   try {
-    const { user } = await getMe(cookie);
-    return json({ user, env });
+    setClientCookie(cookie);
+    const { user, headers } = await getMyUserInfo();
+
+    return json({ user, env }, { headers });
   } catch (e) {
     // console.log("e1", e);
     return json({ user: null, env });
@@ -50,6 +52,8 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   const { user, env } = useLoaderData<LoaderResult>();
+
+  console.log(user);
 
   return (
     <html lang="en">

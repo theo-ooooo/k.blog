@@ -1,4 +1,4 @@
-import client from "../client";
+import { fetchClient } from "../client";
 import { User } from "./types";
 
 interface AuthParams {
@@ -7,7 +7,7 @@ interface AuthParams {
 }
 export interface AuthResult {
   result: boolean;
-  token?: {
+  tokens?: {
     accessToken: string;
     refreshToken: string;
   };
@@ -15,25 +15,27 @@ export interface AuthResult {
 }
 
 export async function logout() {
-  return await client.get("/api/v1/auth/logout");
+  return await fetchClient.request({
+    url: "api/v1/auth/logout",
+    method: "GET",
+  });
 }
 
 export async function login(params: AuthParams) {
-  // const response = await client.post<AuthResult>("/api/v1/auth/login", params);
-  const response = await fetch(`${process.env.API_BASE_URL}api/v1/auth/login`, {
+  const { data, headers } = await fetchClient.request<AuthResult>({
+    url: "api/v1/auth/login",
     method: "POST",
-    body: JSON.stringify(params),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
+    body: params,
   });
 
-  if (!response.ok) {
-    throw new Error(`로그인 실패`);
-  }
+  return { result: data, headers };
+}
 
-  const data = await response.json();
+export async function refresh() {
+  const { data, headers } = await fetchClient.request<AuthResult>({
+    url: "api/v1/auth/refresh",
+    method: "POST",
+  });
 
-  return { result: data, headers: response.headers };
+  return { result: data, headers };
 }

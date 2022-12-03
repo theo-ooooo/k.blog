@@ -6,7 +6,6 @@ import UserInfo from "./UserInfo";
 
 function Header() {
   const user = useUser();
-  console.log(user);
 
   return (
     <div className="w-[100%] h-[62px] fixed z-[999] flex align-center bg-white border-b">
