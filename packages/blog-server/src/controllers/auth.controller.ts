@@ -27,6 +27,11 @@ const authController = {
     clearCookie(res);
     res.send({ result: true, message: '로그아웃 되었습니다.' });
   },
+  refresh: asyncWrapper(async (req: Request, res: Response) => {
+    const authResult = await authService.refesh(req.cookies.refreshToken);
+
+    res.send({ result: true, ...authResult });
+  }),
 };
 
 export default authController;

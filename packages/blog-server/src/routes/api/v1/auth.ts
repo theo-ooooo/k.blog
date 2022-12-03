@@ -1,5 +1,5 @@
 import express from 'express';
-import { body } from 'express-validator';
+import { body, check } from 'express-validator';
 import authController from '../../../controllers/auth.controller';
 import authorization from '../../../middlewares/authorization';
 import { formValidationResult } from '../../../middlewares/common';
@@ -22,6 +22,7 @@ router.post(
   authController.login
 );
 
+router.post('/refresh', authController.refresh);
 router.get('/logout', authController.logout);
 
 export default router;

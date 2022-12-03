@@ -2,7 +2,8 @@ import db from '../libs/db';
 import bcrypt from 'bcrypt';
 import apiError from '../libs/apiError';
 import { StatusCodes } from 'http-status-codes';
-import { generateToken } from '../libs/tokens';
+import { generateToken, validationToken } from '../libs/tokens';
+import { User } from '@prisma/client';
 
 const SALT_ROUNDS = 10;
 
@@ -21,6 +22,10 @@ const authService = {
     return await db.user.findUnique({ where: { email } });
   },
 
+  async getUserById(id: number) {
+    return await db.user.findUnique({ where: { id } });
+  },
+
   async register({ email, password, nickname }: userParams) {
     const exists = await authService.getUserByEmail({ email });
 
@@ -30,6 +35,28 @@ const authService = {
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
     const user = await authService.createUser({ email, password: hash, nickname });
     return { user };
+  },
+
+  async generateTokens(user: User) {
+    const [accessToken, refreshToken] = await Promise.all([
+      generateToken({
+        type: 'accessToken',
+        userId: user.id,
+        avatorUrl: user.avatorUrl,
+        nickname: user.nickname,
+      }),
+      generateToken({
+        type: 'refreshToken',
+        userId: user.id,
+        avatorUrl: user.avatorUrl,
+        nickname: user.nickname,
+      }),
+    ]);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   },
 
   async login({ email, password }: userParams) {
@@ -44,20 +71,23 @@ const authService = {
     if (!passwordCompare) {
       throw new apiError(StatusCodes.UNAUTHORIZED, `password`);
     }
+    const { accessToken, refreshToken } = await this.generateTokens(user);
+    return { user, tokens: { accessToken, refreshToken } };
+  },
+  async refesh({ refreshToken: paramsRefreshToken }: { refreshToken: string }) {
+    if (!paramsRefreshToken) {
+      throw new apiError(StatusCodes.BAD_REQUEST, `bad request`);
+    }
 
-    const accessToken = generateToken({
-      type: 'accessToken',
-      userId: user.id,
-      avatorUrl: user.avatorUrl,
-      nickname: user.nickname,
-    });
-    const refreshToken = generateToken({
-      type: 'refreshToken',
-      userId: user.id,
-      avatorUrl: user.avatorUrl,
-      nickname: user.nickname,
-    });
+    const vaild = validationToken(paramsRefreshToken);
 
+    if (!vaild) {
+      throw new apiError(StatusCodes.UNAUTHORIZED, 're login');
+    }
+
+    const user = await this.getUserById(vaild.userId);
+
+    const { accessToken, refreshToken } = await this.generateTokens(user!);
     return { user, tokens: { accessToken, refreshToken } };
   },
 };
