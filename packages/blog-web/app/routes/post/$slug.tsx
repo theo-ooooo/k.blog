@@ -1,11 +1,15 @@
 import BasicLayout from "~/components/layouts/BasicLayout";
+import Content from "~/components/post/Content";
+import Head from "~/components/post/Head";
+import Tag from "~/components/post/Tag";
 
-function post() {
+function Post() {
   return (
     <BasicLayout>
-      <div>1</div>
+      <Head />
+      <Content />
     </BasicLayout>
   );
 }
 
-export default post;
+export default Post;
