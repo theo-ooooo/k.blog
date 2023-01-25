@@ -46,10 +46,10 @@ export function links() {
   return [
     { rel: "stylesheet", href: styles },
     // { rel: "stylesheet", href: reactMdeStyles },
-    {
-      rel: "stylesheet",
-      href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.css",
-    },
+    // {
+    //   rel: "stylesheet",
+    //   href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.css",
+    // },
   ];
 }
 
