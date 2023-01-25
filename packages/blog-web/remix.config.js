@@ -7,8 +7,8 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
-  serverDependenciesToBundle: [
-    "react-syntax-highlighter",
-    "react-syntax-highlighter/dist/esm/styles/hljs",
-  ],
+  // serverDependenciesToBundle: [
+  //   "react-syntax-highlighter",
+  //   "react-syntax-highlighter/dist/esm/styles/hljs",
+  // ],
 };
