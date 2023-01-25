@@ -6843,6 +6843,11 @@ react-markdown@5.0.3:
     unist-util-visit "^2.0.0"
     xtend "^4.0.1"
 
+react-mde@^11.5.0:
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/react-mde/-/react-mde-11.5.0.tgz#3e81a505071aa80287fb23a1c0ce5e8b34c82055"
+  integrity sha512-CH/VK6d+tpVjJ8rTXfh1dDt6GWedTgCU0668p8toqhAc3vy0Lu872O2RKYDSpkUrlbHI08fjUPTl++nExp6gag==
+
 react-router-dom@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.7.0.tgz#0249f4ca4eb704562b8b0ff29caeb928c3a6ed38"

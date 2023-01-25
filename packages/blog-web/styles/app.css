@@ -1,4 +1,14 @@
-@import url("./markdown.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+.mde-tabs {
+  display: none !important;
+}

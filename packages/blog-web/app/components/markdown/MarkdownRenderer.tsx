@@ -1,7 +1,6 @@
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
-// import { MarkdownImageRender } from '@Style/CommonStyle';
 
 /**
  * 이미지 렌더.
@@ -42,6 +41,7 @@ export default function MarkdwonRenderer() {
     language: string;
     value: string;
   }) => {
+    console.log(github);
     return (
       <SyntaxHighlighter language={language} style={github}>
         {value}

@@ -1,5 +1,4 @@
-import { logout, refresh } from "./api/auth";
-import { User } from "./api/types";
+import { refresh } from "./api/auth";
 import { getMe } from "./api/user";
 import { setClientCookie } from "./client";
 

@@ -9,10 +9,12 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { SangteProvider } from "sangte";
-import { User } from "./lib/api/types";
+import { type User } from "./lib/api/types";
 import { userState } from "./states/user";
 
 import styles from "./styles/app.css";
+import reactMdeStyles from "react-mde/lib/styles/css/react-mde-all.css";
+
 import { setClientCookie } from "./lib/client";
 import { getMyUserInfo } from "./lib/protected";
 interface LoaderResult {
@@ -41,7 +43,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: reactMdeStyles },
+    {
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.css",
+    },
+  ];
 }
 
 export const meta: MetaFunction = () => ({
