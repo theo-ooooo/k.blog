@@ -1,7 +1,9 @@
+import MarkdownRender from "../markdown/MarkdownRender";
+
 function Content() {
   return (
     <div className="w-full p-6 rounded  shadow-md ">
-      12312321321 내용입니다.
+      <MarkdownRender markdownText="# 123123123" />
     </div>
   );
 }

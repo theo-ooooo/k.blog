@@ -27,7 +27,7 @@ function Head() {
       </div>
       <div className="space-x-3">
         {["123", "te1", "te3"].map((tag) => (
-          <Tag tag={tag} />
+          <Tag tag={tag} key={`${tag}`} />
         ))}
       </div>
       <div className="w-full mt-4">
