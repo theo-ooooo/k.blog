@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { MarkdownEditor } from "~/components/markdown/MarkdownEditor";
 import MarkdownRender from "~/components/markdown/MarkdownRender";
 import LabelInput from "~/components/system/Labelnput";
+import WriteForm from "~/components/write/WriteForm";
 import { useWriteActions, useWriteValue } from "~/states/write";
 
 export default function Index() {
@@ -21,7 +22,12 @@ export default function Index() {
     actions.change(key, value);
   };
   return (
-    <div className="flex">
+    <WriteForm
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(form);
+      }}
+    >
       <div className="flex-1 h-full p-3">
         <div className="mb-5">
           <LabelInput
@@ -39,6 +45,6 @@ export default function Index() {
         <h2 className="text-5xl mb-5">{form.title}</h2>
         <MarkdownRender markdownText={form.content} />
       </div>
-    </div>
+    </WriteForm>
   );
 }
