@@ -22,7 +22,7 @@ export default function Index() {
   };
   return (
     <div className="flex">
-      <div className="w-[50%] h-full p-3">
+      <div className="flex-1 h-full p-3">
         <div className="mb-5">
           <LabelInput
             label="제목"
@@ -35,7 +35,7 @@ export default function Index() {
         </div>
         <MarkdownEditor onChange={onChangeContent} value={form.content} />
       </div>
-      <div className="w-[50%] p-3">
+      <div className="flex-1 p-3">
         <h2 className="text-5xl mb-5">{form.title}</h2>
         <MarkdownRender markdownText={form.content} />
       </div>

@@ -14,8 +14,8 @@ export default function MarkdwonRenderer() {
         {...props}
         style={{
           maxWidth: "75%",
-          border: "solid",
-          borderRadius: 15,
+          // border: "solid",
+          // borderRadius: 15,
           marginTop: 50,
           marginBottom: 50,
           textAlign: "center",
@@ -34,17 +34,11 @@ export default function MarkdwonRenderer() {
    * @param param0
    * @returns
    */
-  const CodeBlock = ({
-    language = "",
-    value = "",
-  }: {
-    language: string;
-    value: string;
-  }) => {
-    console.log(github);
+  const CodeBlock = (props: any) => {
+    console.log(props, github);
     return (
-      <SyntaxHighlighter language={language} style={github}>
-        {value}
+      <SyntaxHighlighter language={props.language} style={github}>
+        {props.value}
       </SyntaxHighlighter>
     );
   };
