@@ -15,8 +15,8 @@ export default function WriteForm({
   onClick,
 }: Props) {
   return (
-    <form onSubmit={onSubmit}>
-      <div className="flex">{children}</div>
+    <form onSubmit={onSubmit} className="flex h-full">
+      <div className="flex flex-1">{children}</div>
       <div className="bg-white h-16 fixed bottom-0 w-full flex items-center justify-end px-3">
         <Button
           type={onClick ? "button" : "submit"}
