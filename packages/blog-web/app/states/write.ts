@@ -43,6 +43,9 @@ export const writeState = sangte(initialState, (prev) => ({
   setError(error: AppError) {
     prev.error = error;
   },
+  removeTag(propsTag: string) {
+    prev.form.tags = prev.form.tags.filter((tag) => tag !== propsTag);
+  },
 }));
 
 export function useWriteActions() {
