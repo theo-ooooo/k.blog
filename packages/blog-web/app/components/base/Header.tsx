@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { FiSearch } from "react-icons/fi";
 import { useUser } from "~/states/user";
 import Logo from "./Logo";
+import { SearchArea } from "./SearchArea";
 import UserInfo from "./UserInfo";
 
 function Header() {
@@ -12,9 +13,7 @@ function Header() {
       <div className="my-0 mx-auto flex items-center justify-between relative w-[100%] px-[1rem]">
         <Logo />
         <div className="flex items-center justify-between">
-          <Link to="/search" className="mr-3">
-            <FiSearch size="22" color="#333" />
-          </Link>
+          <SearchArea />
           {user ? (
             <UserInfo nickname={user.nickname!} avatorUrl={user.avatorUrl!} />
           ) : (
