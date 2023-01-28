@@ -3,14 +3,55 @@ import { MdImage } from "react-icons/md";
 import useUpload from "~/hooks/useUpload";
 import WriteForm from "~/components/write/WriteForm";
 import { useCallback, useEffect } from "react";
-import { thumbnailUpload } from "~/lib/api/post";
+import { createPost, thumbnailUpload } from "~/lib/api/post";
 import { useWriteActions, useWriteValue } from "~/states/write";
+import { ActionFunction, json, redirect } from "@remix-run/node";
+import { applyAuth } from "~/lib/applyAuth";
+import { useFetcher, useNavigate } from "react-router-dom";
+import _ from "lodash";
+import { AppError } from "~/lib/error";
+import { ThrownResponse, useCatch } from "@remix-run/react";
+
+export const action: ActionFunction = async ({ request }) => {
+  const applied = applyAuth(request);
+
+  if (!applied) {
+    throw new Error("not logged in");
+  }
+
+  const form = await request.formData();
+  const title = form.get("title") as string;
+  const content = form.get("content") as string;
+  const tags = form.get("tags") as string;
+  const display = form.get("display") as string;
+  const thumbnailId = form.get("thumbnailId") as string;
+
+  const tagArr = _.compact(_.split(tags, ","));
+  const numberDisplay = +display;
+  const numberThumbnailId = +thumbnailId;
+
+  try {
+    await createPost({
+      title,
+      content,
+      tags: tagArr,
+      display: numberDisplay,
+      thumbnailId: numberThumbnailId,
+    });
+
+    return redirect("/");
+  } catch (e) {
+    console.log(e);
+
+    throw json(e);
+  }
+};
 
 export default function Thumbnail() {
   const [upload, file] = useUpload();
   const actions = useWriteActions();
-  const { thumnailPath } = useWriteValue();
-  console.log(thumnailPath);
+  const fetcher = useFetcher();
+  const { thumnailPath, form } = useWriteValue();
 
   const uploadFn = useCallback(async () => {
     if (!file) return;
@@ -36,6 +77,7 @@ export default function Thumbnail() {
     <WriteForm
       onSubmit={(e) => {
         e.preventDefault();
+        fetcher.submit(form, { method: "post" });
       }}
       buttonText="저장"
     >
@@ -71,4 +113,17 @@ export default function Thumbnail() {
       </div>
     </WriteForm>
   );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch<ThrownResponse<number, AppError>>();
+  const actions = useWriteActions();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (caught.status === 500) {
+      navigate(-1);
+      actions.setError(caught.data);
+    }
+  }, [caught, navigate, actions]);
+  return <Thumbnail />;
 }

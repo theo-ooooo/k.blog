@@ -8,6 +8,14 @@ interface ThumbnailResult {
   };
 }
 
+interface CreatePostParams {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailId: number | null;
+  display: number;
+}
+
 export async function thumbnailUpload(data: File) {
   let formData = new FormData();
   formData.append("file", data);
@@ -16,5 +24,16 @@ export async function thumbnailUpload(data: File) {
     url: "api/v1/image/thumbnailUpload",
     method: "POST",
     body: formData,
+  });
+}
+
+export async function createPost(params: CreatePostParams) {
+  return await fetchClient.request({
+    url: "api/v1/posts/create",
+    method: "POST",
+    body: params,
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 }

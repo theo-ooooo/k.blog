@@ -59,7 +59,11 @@ export default function Index() {
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      onClick={() => navigate("/write/thumbnail")}
+      onClick={() => {
+        if (!form.title || !form.content)
+          return alert("제목과 내용을 입력해주세요.");
+        navigate("/write/thumbnail");
+      }}
       buttonText={"다음"}
     >
       <div className="flex-1 h-full p-3">
