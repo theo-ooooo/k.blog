@@ -86,7 +86,7 @@ export default function Index() {
         </div>
         <div className="mb-5 flex gap-2">
           {_.map(form.tags, (tag) => (
-            <Tag tag={tag} onClick={tagDelete} />
+            <Tag key={tag} tag={tag} onClick={tagDelete} />
           ))}
         </div>
         <MarkdownEditor onChange={onChangeContent} value={form.content} />
