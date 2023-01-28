@@ -1,16 +1,20 @@
 import { fetchClient } from "../client";
+interface ThumbnailResult {
+  result: boolean;
+  data: {
+    imageId: string;
+    path: string;
+    thumbnailId: number;
+  };
+}
 
 export async function thumbnailUpload(data: File) {
-  const formData = new FormData();
+  let formData = new FormData();
   formData.append("file", data);
-  return await fetchClient.request({
+
+  return await fetchClient.request<ThumbnailResult>({
     url: "api/v1/image/thumbnailUpload",
     method: "POST",
-    body: {
-      formData,
-    },
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+    body: formData,
   });
 }

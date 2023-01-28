@@ -20,15 +20,20 @@ export const fetchClient = {
     headers?: { [key: string]: any };
     body?: { [key: string]: any };
   }) {
+    let requestBody: any = body ? JSON.stringify(body) : undefined;
+
+    if (url === "api/v1/image/thumbnailUpload") {
+      requestBody = body;
+    }
+
     const response = await fetch(this.baseUrl + url, {
       method,
       credentials: "include",
       headers: {
         Cookie: _cookie,
         ...headers,
-        "Content-Type": "application/json",
       },
-      body: body ? JSON.stringify(body) : undefined,
+      body: requestBody,
     });
 
     if (!response.ok) {

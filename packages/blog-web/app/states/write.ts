@@ -10,6 +10,7 @@ interface WriteState {
     display: number;
     thumbnailId: number | null;
   };
+  thumnailPath: string;
   error?: AppError;
 }
 
@@ -21,6 +22,7 @@ const initialState: WriteState = {
     display: 1,
     thumbnailId: null,
   },
+  thumnailPath: "",
   error: undefined,
 };
 
@@ -45,6 +47,9 @@ export const writeState = sangte(initialState, (prev) => ({
   },
   removeTag(propsTag: string) {
     prev.form.tags = prev.form.tags.filter((tag) => tag !== propsTag);
+  },
+  changeThumbnail(thumbnailPath: string) {
+    prev.thumnailPath = thumbnailPath;
   },
 }));
 
