@@ -10,7 +10,14 @@ interface tagParams {
 
 const tagService = {
   async getTagList() {
-    const tags = await db.tag.findMany({ where: { display: 1 }, orderBy: { id: 'desc' } });
+    const tags = await db.tag.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      where: { display: 1 },
+      orderBy: { id: 'desc' },
+    });
 
     return { tags };
   },

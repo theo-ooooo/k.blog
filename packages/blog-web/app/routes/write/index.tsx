@@ -1,14 +1,25 @@
-import { useNavigate } from "@remix-run/react";
+import { json, type LoaderFunction } from "@remix-run/node";
+import { useLoaderData, useNavigate } from "@remix-run/react";
 import _ from "lodash";
 import React, { useCallback, useState } from "react";
 import { MarkdownEditor } from "~/components/markdown/MarkdownEditor";
 import MarkdownRender from "~/components/markdown/MarkdownRender";
 import Tag from "~/components/post/Tag";
+import TagLayer from "~/components/post/TagLayer";
 import LabelInput from "~/components/system/Labelnput";
 import WriteForm from "~/components/write/WriteForm";
+import { getTagList } from "~/lib/api/post";
 import { useWriteActions, useWriteValue } from "~/states/write";
 
+export const loader: LoaderFunction = async () => {
+  const { data } = await getTagList();
+  console.log(data.data.tags);
+  return json({ tagList: data.data.tags || [] });
+};
+
 export default function Index() {
+  const data = useLoaderData();
+
   const [tag, setTag] = useState<string>("");
   const { form } = useWriteValue();
 
@@ -34,11 +45,6 @@ export default function Index() {
     const key = e.target.name as "title" | "tags";
     const { value } = e.target;
     actions.change(key, value);
-  };
-
-  const onChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setTag(value);
   };
 
   const onKeyDown = useCallback(
@@ -77,7 +83,7 @@ export default function Index() {
             value={form.title}
           />
         </div>
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <LabelInput
             label="태그"
             placeholder="태그를 입력해주세요"
@@ -87,18 +93,19 @@ export default function Index() {
             value={tag}
             onKeyDown={onKeyDown}
           />
-        </div>
-        <div className="mb-5 flex gap-2">
+        </div> */}
+        {/* <div className="mb-5 flex gap-2">
           {_.map(form.tags, (tag) => (
             <Tag key={tag} tag={tag} onClick={tagDelete} />
           ))}
-        </div>
+        </div> */}
         <MarkdownEditor onChange={onChangeContent} value={form.content} />
       </div>
       <div className="flex-1 p-3">
         <h2 className="text-5xl mb-5">{form.title}</h2>
         <MarkdownRender markdownText={form.content} />
       </div>
+      {/* <TagLayer list={data.tagList} visible={true} selectedTag={[]} /> */}
     </WriteForm>
   );
 }

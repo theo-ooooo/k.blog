@@ -5,7 +5,7 @@ import type { AppError } from "~/lib/error";
 interface WriteState {
   form: {
     title: string;
-    tags: string[];
+    tags: number[];
     content: string;
     display: number;
     thumbnailId: number | null;
@@ -28,7 +28,7 @@ const initialState: WriteState = {
 
 export const writeState = sangte(initialState, (prev) => ({
   change(key: keyof WriteState["form"], value: string | number) {
-    if (key === "tags" && typeof value === "string") {
+    if (key === "tags" && typeof value === "number") {
       prev.form[key].push(value);
     } else if (
       (key === "title" || key === "content") &&
@@ -45,7 +45,7 @@ export const writeState = sangte(initialState, (prev) => ({
   setError(error: AppError) {
     prev.error = error;
   },
-  removeTag(propsTag: string) {
+  removeTag(propsTag: number) {
     prev.form.tags = prev.form.tags.filter((tag) => tag !== propsTag);
   },
   changeThumbnail(thumbnailPath: string) {

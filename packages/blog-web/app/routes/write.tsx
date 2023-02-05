@@ -7,8 +7,6 @@ export const loader: LoaderFunction = ({ request }) => {
 
   const isLogin = cookie ? true : false;
 
-  console.log("12312312312", isLogin);
-
   if (!isLogin) {
     return redirect("/");
   }

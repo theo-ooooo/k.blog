@@ -8,6 +8,16 @@ interface ThumbnailResult {
   };
 }
 
+interface TagListResult {
+  result: boolean;
+  data: {
+    tags: {
+      id: number;
+      name: string;
+    }[];
+  };
+}
+
 interface CreatePostParams {
   title: string;
   content: string;
@@ -32,6 +42,16 @@ export async function createPost(params: CreatePostParams) {
     url: "api/v1/posts/create",
     method: "POST",
     body: params,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+export async function getTagList() {
+  return await fetchClient.request<TagListResult>({
+    url: "api/v1/tags/list",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
