@@ -43,7 +43,7 @@ function PostCard({ item }: Props) {
             className="object-cover rounded-full w-6 h-6 block mr-2"
           />
           <span>
-            by <strong>{item.user.nickname}</strong>
+            by <strong>{item.user.nickname || "강경원"}</strong>
           </span>
         </div>
       </div>
