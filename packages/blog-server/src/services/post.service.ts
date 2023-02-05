@@ -64,7 +64,13 @@ const postService = {
       include: {
         user: {
           select: {
+            id: true,
             nickname: true,
+          },
+        },
+        postThumbnailImage: {
+          select: {
+            webp: true,
           },
         },
       },
@@ -72,7 +78,14 @@ const postService = {
     if (!post) {
       throw new apiError(StatusCodes.NOT_FOUND, 'post not found');
     }
-    return post;
+    return {
+      ...post,
+      postThumbnailImage: {
+        webp: post.postThumbnailImage
+          ? process.env.THUMBNAIL_IMAGE_CDN_URL + '/' + post.postThumbnailImage.webp
+          : null,
+      },
+    };
   },
   async createPostTags(tags: number[], post: Post) {
     await db.postTag.createMany({

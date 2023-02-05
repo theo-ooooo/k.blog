@@ -31,6 +31,11 @@ interface PostsResult {
   data: { posts: Post[]; hasMorePost: boolean };
 }
 
+interface PostResult {
+  result: boolean;
+  data: Post;
+}
+
 interface Pagination<T> {
   posts: T[];
   hasMorePost: boolean;
@@ -97,5 +102,14 @@ export async function getPostList(lastId?: number | null) {
       lastId,
     },
   });
+  return data.data;
+}
+
+export async function getPost(slug: string) {
+  const { data } = await fetchClient.request<PostResult>({
+    url: `api/v1/posts/${slug}`,
+    method: "GET",
+  });
+
   return data.data;
 }
