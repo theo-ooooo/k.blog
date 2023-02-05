@@ -26,6 +26,34 @@ interface CreatePostParams {
   display: number;
 }
 
+interface PostsResult {
+  result: boolean;
+  data: { posts: Post[]; hasMorePost: boolean };
+}
+
+interface Pagination<T> {
+  posts: T[];
+  hasMorePost: boolean;
+}
+
+export type GetItemsResult = Pagination<Post>;
+
+export interface Post {
+  id: number;
+  slug: string;
+  title: string;
+  content: string;
+  user: {
+    id: number;
+    nickname: string;
+  };
+  postThumbnailImage: {
+    webp: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export async function thumbnailUpload(data: File) {
   let formData = new FormData();
   formData.append("file", data);
@@ -56,4 +84,18 @@ export async function getTagList() {
       "Content-Type": "application/json",
     },
   });
+}
+
+export async function getPostList(lastId?: number | null) {
+  const { data } = await fetchClient.request<PostsResult>({
+    url: "api/v1/posts/list",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: {
+      lastId,
+    },
+  });
+  return data.data;
 }

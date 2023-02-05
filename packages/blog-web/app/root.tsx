@@ -11,12 +11,15 @@ import {
 import { SangteProvider } from "sangte";
 import { type User } from "./lib/api/types";
 import { userState } from "./states/user";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import styles from "./styles/app.css";
 import reactMdeStyles from "react-mde/lib/styles/css/react-mde-all.css";
 
 import { setClientCookie } from "./lib/client";
 import { getMyUserInfo } from "./lib/protected";
+import { useRef } from "react";
 interface LoaderResult {
   user: User | null;
   env: {
@@ -62,7 +65,15 @@ export const meta: MetaFunction = () => ({
 export default function App() {
   const { user, env } = useLoaderData<LoaderResult>();
 
-  console.log(user);
+  const queryClient = useRef(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 5,
+        },
+      },
+    })
+  ).current;
 
   return (
     <html lang="en">
@@ -83,10 +94,13 @@ export default function App() {
             set(userState, user);
           }}
         >
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
+          <QueryClientProvider client={queryClient}>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+            <ReactQueryDevtools />
+          </QueryClientProvider>
         </SangteProvider>
       </body>
     </html>

@@ -17,6 +17,24 @@ const postService = {
   async getPostList({ lastId }: { lastId?: number }) {
     const postLimit = 10;
     const posts = await db.post.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        slug: true,
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+          },
+        },
+        postThumbnailImage: {
+          select: {
+            webp: true,
+          },
+        },
+      },
       where: {
         display: 1,
       },
@@ -28,7 +46,17 @@ const postService = {
       },
     });
 
-    return { posts, hasMorePost: posts.length > postLimit };
+    return {
+      posts: _.map(posts, (post) => ({
+        ...post,
+        postThumbnailImage: {
+          webp: post.postThumbnailImage?.webp
+            ? process.env.THUMBNAIL_IMAGE_CDN_URL + '/' + post.postThumbnailImage.webp
+            : null,
+        },
+      })),
+      hasMorePost: posts.length > postLimit,
+    };
   },
   async getPost({ slug }: { slug: string }) {
     const post = await db.post.findFirst({
