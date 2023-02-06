@@ -102,6 +102,7 @@ export async function getPostList(lastId?: number | null) {
       lastId,
     },
   });
+
   return data.data;
 }
 

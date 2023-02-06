@@ -5,7 +5,8 @@ import { useCallback, useRef } from "react";
 import PostCardList from "~/components/home/PostCardList";
 import BasicLayout from "~/components/layouts/BasicLayout";
 import { useInfiniteScroll } from "~/hooks/useInfiniteScroll";
-import { GetItemsResult, getPostList, Post } from "~/lib/api/post";
+import type { GetItemsResult } from "~/lib/api/post";
+import { getPostList } from "~/lib/api/post";
 
 export const loader: LoaderFunction = async () => {
   try {

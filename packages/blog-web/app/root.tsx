@@ -12,7 +12,7 @@ import { SangteProvider } from "sangte";
 import { type User } from "./lib/api/types";
 import { userState } from "./states/user";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import styles from "./styles/app.css";
 import reactMdeStyles from "react-mde/lib/styles/css/react-mde-all.css";
@@ -99,7 +99,7 @@ export default function App() {
             <ScrollRestoration />
             <Scripts />
             <LiveReload />
-            <ReactQueryDevtools />
+            {/* <ReactQueryDevtools /> */}
           </QueryClientProvider>
         </SangteProvider>
       </body>
