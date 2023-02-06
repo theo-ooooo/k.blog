@@ -16,7 +16,7 @@ interface ModalState {
 
 const initialState: ModalState = {
   config: null,
-  visible: true,
+  visible: false,
 };
 
 const modalState = sangte(
