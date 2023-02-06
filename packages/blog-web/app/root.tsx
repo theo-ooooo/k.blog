@@ -20,6 +20,7 @@ import reactMdeStyles from "react-mde/lib/styles/css/react-mde-all.css";
 import { setClientCookie } from "./lib/client";
 import { getMyUserInfo } from "./lib/protected";
 import { useRef } from "react";
+import GlobalModal from "./components/GlobalModal";
 interface LoaderResult {
   user: User | null;
   env: {
@@ -99,6 +100,7 @@ export default function App() {
             <ScrollRestoration />
             <Scripts />
             <LiveReload />
+            <GlobalModal />
             {/* <ReactQueryDevtools /> */}
           </QueryClientProvider>
         </SangteProvider>

@@ -1,7 +1,9 @@
 // import Tag from "./Tag";
 
+import { useNavigate } from "@remix-run/react";
 import dayjs from "dayjs";
 import type { User } from "~/lib/api/types";
+import { useOpenModal } from "~/states/modal";
 
 interface Props {
   title: string;
@@ -14,6 +16,21 @@ interface Props {
 
 function Head(props: Props) {
   const { title, user, publishId, createdAt, publishName, thumbnail } = props;
+  const openModal = useOpenModal();
+  const navigate = useNavigate();
+
+  const onClickDelete = () => {
+    openModal({
+      title: "삭제",
+      content: `${title} 게시글을 삭제하시겠습니까?`,
+      cancelText: "취소",
+      confirmText: "삭제",
+      async onConfirm() {
+        // TODO: 삭제 api 호출
+        navigate("/");
+      },
+    });
+  };
   return (
     <div className="w-full p-6 rounded-md">
       <h1 className="text-gray-900 xl:text-[2.5rem] -tracking-[2.5px] xl:mb-8 sm:mb-3 text-[1.5rem]">
@@ -30,6 +47,7 @@ function Head(props: Props) {
           <button
             type="button"
             className="p-0 outline-0 border-0 bg-[none] text-[inherit] cursor-pointer text-gray-600 hover:text-gray-900"
+            onClick={onClickDelete}
           >
             삭제
           </button>
