@@ -38,13 +38,13 @@ export const meta: MetaFunction = ({ data }: { data: Post }) => {
       ? "summary_large_image"
       : "summary",
     "twitter:site": "<blog.kwkang.dev/>",
-    "twitter:title": data.title,
+    "twitter:title": `${data.title} - kwkang`,
     "twitter:description": shortDescription,
     "twitter:image": data.postThumbnailImage.webp,
   };
 
   return {
-    title: data.title,
+    title: `${data.title} - kwkang`,
     description: shortDescription,
     "og:title": data.title,
     "og:description": shortDescription,
