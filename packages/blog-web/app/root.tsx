@@ -20,7 +20,7 @@ import reactMdeStyles from "react-mde/lib/styles/css/react-mde-all.css";
 import { setClientCookie } from "./lib/client";
 import { getMyUserInfo } from "./lib/protected";
 import { useRef } from "react";
-import GlobalModal from "./components/GlobalModal";
+import GlobalModal from "./components/base/GlobalModal";
 interface LoaderResult {
   user: User | null;
   env: {

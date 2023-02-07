@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useModalActions, useModalValue } from "~/states/modal";
-import Modal from "./system/Modal";
+import Modal from "../system/Modal";
 
 function GlobalModal() {
   const { config, visible } = useModalValue();
@@ -15,8 +15,6 @@ function GlobalModal() {
     config?.onConfirm?.();
     actions.close();
   }, [config, actions]);
-
-  console.log(111);
 
   return (
     <Modal
