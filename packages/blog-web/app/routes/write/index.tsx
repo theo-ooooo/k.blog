@@ -1,13 +1,14 @@
 import { json, type LoaderFunction } from "@remix-run/node";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import _ from "lodash";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { MarkdownEditor } from "~/components/markdown/MarkdownEditor";
 import MarkdownRender from "~/components/markdown/MarkdownRender";
-import Tag from "~/components/post/Tag";
-import TagLayer from "~/components/post/TagLayer";
+// import Tag from "~/components/post/Tag";
+// import TagLayer from "~/components/post/TagLayer";
 import LabelInput from "~/components/system/Labelnput";
 import WriteForm from "~/components/write/WriteForm";
+import useWrite from "~/hooks/useWrite";
 import { getTagList } from "~/lib/api/post";
 import { useWriteActions, useWriteValue } from "~/states/write";
 
@@ -18,47 +19,8 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-  const data = useLoaderData();
-
-  const [tag, setTag] = useState<string>("");
-  const { form } = useWriteValue();
-
   const navigate = useNavigate();
-  const actions = useWriteActions();
-  const onChangeContent = useCallback(
-    (text: string) => {
-      actions.change("content", text);
-    },
-    [actions]
-  );
-  const validationTag = useCallback(
-    (tag: string) => {
-      const resultTag = _.trim(_.replace(tag, "#", ""));
-      if (tag === "" || _.includes(form.tags, resultTag)) return;
-      actions.change("tags", resultTag);
-      setTag("");
-    },
-    [form, actions]
-  );
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const key = e.target.name as "title" | "tags";
-    const { value } = e.target;
-    actions.change(key, value);
-  };
-
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        validationTag(tag);
-      }
-    },
-    [validationTag, tag]
-  );
-
-  const tagDelete = (tag: string) => {
-    actions.removeTag(tag);
-  };
+  const { form, onChange, onChangeContent } = useWrite();
 
   return (
     <WriteForm

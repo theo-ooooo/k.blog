@@ -14,7 +14,7 @@ interface Props {
   publishId: number;
   publishName: string;
   createdAt: string;
-  thumbnail: string | undefined;
+  thumbnail: string | null;
 }
 
 function Head(props: Props) {
@@ -45,6 +45,7 @@ function Head(props: Props) {
           <button
             type="button"
             className="p-0 outline-0 border-0 bg-[none] text-[inherit] cursor-pointer text-gray-600 hover:text-gray-900"
+            onClick={() => navigate(`/write/${post.slug}/edit`)}
           >
             수정
           </button>

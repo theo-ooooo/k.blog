@@ -4,6 +4,7 @@ import type { AppError } from "~/lib/error";
 
 interface WriteState {
   form: {
+    postId?: number;
     title: string;
     tags: number[];
     content: string;
@@ -16,6 +17,7 @@ interface WriteState {
 
 const initialState: WriteState = {
   form: {
+    postId: undefined,
     title: "",
     tags: [],
     content: "",
@@ -36,7 +38,7 @@ export const writeState = sangte(initialState, (prev) => ({
     ) {
       prev.form[key] = value;
     } else if (
-      (key === "display" || key === "thumbnailId") &&
+      (key === "display" || key === "thumbnailId" || key === "postId") &&
       typeof value === "number"
     ) {
       prev.form[key] = value;

@@ -3,7 +3,7 @@ import { MdImage } from "react-icons/md";
 import useUpload from "~/hooks/useUpload";
 import WriteForm from "~/components/write/WriteForm";
 import { useCallback, useEffect } from "react";
-import { createPost, thumbnailUpload } from "~/lib/api/post";
+import { thumbnailUpload, updatePost } from "~/lib/api/post";
 import { useWriteActions, useWriteValue } from "~/states/write";
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
@@ -22,6 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const form = await request.formData();
+  const postId = form.get("postId") as string;
   const title = form.get("title") as string;
   const content = form.get("content") as string;
   const tags = form.get("tags") as string;
@@ -29,16 +30,15 @@ export const action: ActionFunction = async ({ request }) => {
   const thumbnailId = form.get("thumbnailId") as string;
 
   const tagArr = _.compact(_.split(tags, ","));
-  const numberDisplay = +display;
-  const numberThumbnailId = +thumbnailId;
 
   try {
-    await createPost({
+    await updatePost({
+      postId: +postId,
       title,
       content,
       tags: tagArr,
-      display: numberDisplay,
-      thumbnailId: numberThumbnailId,
+      display: +display,
+      thumbnailId: +thumbnailId,
     });
 
     return redirect("/");

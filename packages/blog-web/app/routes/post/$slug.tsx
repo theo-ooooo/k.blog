@@ -9,7 +9,6 @@ import { useUser } from "~/states/user";
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
-    console.log(params);
     const slug = params.slug;
     if (!slug) {
       throw json({ message: "notfound" }, { status: 404 });
@@ -28,7 +27,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 function PostDetail() {
   const data = useLoaderData<Post>();
-  console.log(data);
   const user = useUser();
 
   return (
@@ -41,7 +39,7 @@ function PostDetail() {
           user={user}
           publishName={data.user.nickname}
           publishId={data.user.id}
-          thumbnail={data.postThumbnailImage?.webp}
+          thumbnail={data.postThumbnailImage.webp}
         />
         <Content content={data.content} />
       </div>

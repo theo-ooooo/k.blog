@@ -49,13 +49,14 @@ export interface Post {
   slug: string;
   title: string;
   content: string;
+  thumbnailId: number | null;
   user: {
     id: number;
     nickname: string;
   };
   postThumbnailImage: {
-    webp: string;
-  } | null;
+    webp: string | null;
+  };
   createdAt: string;
   updatedAt: string;
 }
