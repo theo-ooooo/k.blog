@@ -1121,6 +1121,10 @@ video {
   letter-spacing: -1px;
 }
 
+.-tracking-\[1\.5px\] {
+  letter-spacing: -1.5px;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));

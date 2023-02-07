@@ -37,7 +37,7 @@ function Head(props: Props) {
   };
   return (
     <div className="w-full p-6 rounded-md">
-      <h1 className="text-gray-900 xl:text-[2.5rem] -tracking-[2.5px] xl:mb-8 sm:mb-3 text-[1.5rem]">
+      <h1 className="text-gray-900 xl:text-[2.5rem] -tracking-[1.5px] xl:mb-8 sm:mb-3 text-[1.5rem]">
         {title}
       </h1>
       {user?.userId === publishId && (
