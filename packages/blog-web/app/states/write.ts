@@ -53,6 +53,10 @@ export const writeState = sangte(initialState, (prev) => ({
   changeThumbnail(thumbnailPath: string) {
     prev.thumnailPath = thumbnailPath;
   },
+  removeThumbnail() {
+    prev.thumnailPath = "";
+    prev.form.thumbnailId = null;
+  },
 }));
 
 export function useWriteActions() {

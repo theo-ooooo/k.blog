@@ -67,7 +67,7 @@ export default function Thumbnail() {
   }, [file, actions]);
 
   const deleteImage = () => {
-    actions.changeThumbnail("");
+    actions.removeThumbnail();
   };
 
   useEffect(() => {
