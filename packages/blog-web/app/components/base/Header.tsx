@@ -1,8 +1,6 @@
 import { Link } from "@remix-run/react";
-import { FiSearch } from "react-icons/fi";
 import { useUser } from "~/states/user";
 import Logo from "./Logo";
-import { SearchArea } from "./SearchArea";
 import UserInfo from "./UserInfo";
 
 function Header() {
@@ -13,7 +11,7 @@ function Header() {
       <div className="my-0 mx-auto flex items-center justify-between relative w-[100%] px-[1rem]">
         <Logo />
         <div className="flex items-center justify-between">
-          <SearchArea />
+          {/* <SearchArea /> */}
           {user ? (
             <UserInfo nickname={user.nickname!} avatorUrl={user.avatorUrl!} />
           ) : (
