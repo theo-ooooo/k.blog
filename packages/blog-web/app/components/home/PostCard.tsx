@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import dayjs from "dayjs";
-import { Post } from "~/lib/api/post";
+import type { Post } from "~/lib/api/post";
+import removeMd from "remove-markdown";
 
 interface Props {
   item: Post;
@@ -28,7 +29,7 @@ function PostCard({ item }: Props) {
           {item.title}
         </h2>
         <p className="mb-6 break-words text-sm h-14 overflow-hidden text-ellipsis text-gray-400">
-          {item.content}
+          {removeMd(item.content)}
         </p>
       </div>
       {/* 날짜 영역 */}
