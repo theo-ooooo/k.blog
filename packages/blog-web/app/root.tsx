@@ -77,7 +77,7 @@ export default function App() {
   ).current;
 
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <Meta />
         <Links />
