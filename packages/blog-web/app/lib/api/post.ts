@@ -18,12 +18,13 @@ interface TagListResult {
   };
 }
 
-interface CreatePostParams {
-  title: string;
-  content: string;
-  tags: string[];
-  thumbnailId: number | null;
-  display: number;
+interface SetPostParams {
+  postId?: number;
+  title?: string;
+  content?: string;
+  tags?: string[];
+  thumbnailId?: number | null;
+  display?: number;
 }
 
 interface PostsResult {
@@ -59,6 +60,11 @@ export interface Post {
   updatedAt: string;
 }
 
+export interface UpdatePostsResult {
+  result: boolean;
+  data: { message: string };
+}
+
 export async function thumbnailUpload(data: File) {
   let formData = new FormData();
   formData.append("file", data);
@@ -70,7 +76,7 @@ export async function thumbnailUpload(data: File) {
   });
 }
 
-export async function createPost(params: CreatePostParams) {
+export async function createPost(params: SetPostParams) {
   return await fetchClient.request({
     url: "api/v1/posts/create",
     method: "POST",
@@ -113,4 +119,15 @@ export async function getPost(slug: string) {
   });
 
   return data.data;
+}
+
+export async function updatePost(params: SetPostParams) {
+  return await fetchClient.request<UpdatePostsResult>({
+    url: "api/v1/posts/update",
+    method: "POST",
+    body: params,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

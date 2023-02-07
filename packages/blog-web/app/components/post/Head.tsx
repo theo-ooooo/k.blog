@@ -2,10 +2,13 @@
 
 import { useNavigate } from "@remix-run/react";
 import dayjs from "dayjs";
+import type { Post } from "~/lib/api/post";
+import { updatePost } from "~/lib/api/post";
 import type { User } from "~/lib/api/types";
 import { useOpenModal } from "~/states/modal";
 
 interface Props {
+  post: Post;
   title: string;
   user: User | null;
   publishId: number;
@@ -15,7 +18,8 @@ interface Props {
 }
 
 function Head(props: Props) {
-  const { title, user, publishId, createdAt, publishName, thumbnail } = props;
+  const { title, user, publishId, createdAt, publishName, thumbnail, post } =
+    props;
   const openModal = useOpenModal();
   const navigate = useNavigate();
 
@@ -26,7 +30,7 @@ function Head(props: Props) {
       cancelText: "취소",
       confirmText: "삭제",
       async onConfirm() {
-        // TODO: 삭제 api 호출
+        await updatePost({ ...post, display: 0, postId: post.id });
         navigate("/");
       },
     });

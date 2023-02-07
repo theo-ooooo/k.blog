@@ -35,6 +35,7 @@ function PostDetail() {
     <BasicLayout>
       <div className="bg-white">
         <Head
+          post={data}
           title={data.title}
           createdAt={data.createdAt}
           user={user}
