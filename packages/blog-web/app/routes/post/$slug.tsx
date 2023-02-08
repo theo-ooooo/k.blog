@@ -1,10 +1,11 @@
-import { json, MetaFunction, type LoaderFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
+import { json, type LoaderFunction } from "@remix-run/node";
 import BasicLayout from "~/components/layouts/BasicLayout";
 import Content from "~/components/post/Content";
 import Head from "~/components/post/Head";
 import { getPost } from "~/lib/api/post";
 import type { Post } from "~/lib/api/post";
-import { useLoaderData } from "@remix-run/react";
+import { useCatch, useLoaderData, useNavigate } from "@remix-run/react";
 import { useUser } from "~/states/user";
 import removeMd from "remove-markdown";
 
@@ -73,6 +74,22 @@ function PostDetail() {
         <Content content={data.content} />
       </div>
     </BasicLayout>
+  );
+}
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h1>없는 페이지거나, 오류가 발생하였습니다.</h1>
+      <p>Status: {caught.status}</p>
+      <button onClick={() => navigate("/")}>메인으로 이동하기</button>
+      <pre>
+        <code>{JSON.stringify(caught.data, null, 2)}</code>
+      </pre>
+    </div>
   );
 }
 
