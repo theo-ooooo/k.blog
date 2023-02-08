@@ -28,31 +28,34 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export const meta: MetaFunction = ({ data }: { data: Post }) => {
-  const plainText = removeMd(data.content);
+  if (data) {
+    const plainText = removeMd(data.content);
 
-  const shortDescription = plainText
-    .slice(0, 300)
-    .concat(plainText.length > 300 ? "..." : "");
+    const shortDescription = plainText
+      .slice(0, 300)
+      .concat(plainText.length > 300 ? "..." : "");
 
-  const twitterCardInfo = {
-    "twitter:card": data.postThumbnailImage.webp
-      ? "summary_large_image"
-      : "summary",
-    "twitter:site": "<blog.kwkang.dev/>",
-    "twitter:title": `${data.title} - kwkang`,
-    "twitter:description": shortDescription,
-    "twitter:image": data.postThumbnailImage.webp,
-  };
+    const twitterCardInfo = {
+      "twitter:card": data.postThumbnailImage.webp
+        ? "summary_large_image"
+        : "summary",
+      "twitter:site": "<blog.kwkang.dev/>",
+      "twitter:title": `${data.title} - kwkang`,
+      "twitter:description": shortDescription,
+      "twitter:image": data.postThumbnailImage.webp,
+    };
 
-  return {
-    title: `${data.title} - kwkang`,
-    description: shortDescription,
-    "og:title": data.title,
-    "og:description": shortDescription,
-    "og:image": data.postThumbnailImage.webp ?? undefined,
-    "article:author": data.user.nickname,
-    ...twitterCardInfo,
-  };
+    return {
+      title: `${data.title} - kwkang`,
+      description: shortDescription,
+      "og:title": data.title,
+      "og:description": shortDescription,
+      "og:image": data.postThumbnailImage.webp ?? undefined,
+      "article:author": data.user.nickname,
+      ...twitterCardInfo,
+    };
+  }
+  return {};
 };
 
 function PostDetail() {
@@ -82,13 +85,18 @@ export function CatchBoundary() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>없는 페이지거나, 오류가 발생하였습니다.</h1>
-      <p>Status: {caught.status}</p>
-      <button onClick={() => navigate("/")}>메인으로 이동하기</button>
-      <pre>
-        <code>{JSON.stringify(caught.data, null, 2)}</code>
-      </pre>
+    <div className="absolute top-[50%] left-[50%] w-[300px] h-[300px] translate-x-[-50%] translate-y-[-50%] flex justify-center flex-col items-center">
+      <h1 className="text-xl font-semibold mb-5 -tracking-[1px] ">
+        {caught.data.message === "post not found"
+          ? "존재하지 게시글 입니다."
+          : "에러가 발생하였습니다."}
+      </h1>
+      <button
+        className="bg-blue-400 p-2 text-sm text-white rounded cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        메인으로 이동하기
+      </button>
     </div>
   );
 }
