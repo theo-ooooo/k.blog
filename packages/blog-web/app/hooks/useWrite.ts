@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import { useWriteActions, useWriteValue } from "~/states/write";
+import { useNavigate } from "@remix-run/react";
 
 function useWrite() {
   const { form } = useWriteValue();
+  const navigate = useNavigate();
 
   const actions = useWriteActions();
   const onChangeContent = useCallback(
@@ -40,7 +42,12 @@ function useWrite() {
   //   actions.removeTag(tag);
   // };
 
-  return { form, onChangeContent, onChange };
+  const closeAction = () => {
+    actions.reset();
+    navigate("/");
+  };
+
+  return { form, onChangeContent, onChange, closeAction };
 }
 
 export default useWrite;

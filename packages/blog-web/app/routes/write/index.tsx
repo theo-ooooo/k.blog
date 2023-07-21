@@ -10,7 +10,6 @@ import LabelInput from "~/components/system/Labelnput";
 import WriteForm from "~/components/write/WriteForm";
 import useWrite from "~/hooks/useWrite";
 import { getTagList } from "~/lib/api/post";
-import { useWriteActions, useWriteValue } from "~/states/write";
 
 export const loader: LoaderFunction = async () => {
   const { data } = await getTagList();
@@ -20,7 +19,7 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   const navigate = useNavigate();
-  const { form, onChange, onChangeContent } = useWrite();
+  const { form, onChange, onChangeContent, closeAction } = useWrite();
 
   return (
     <WriteForm
@@ -33,6 +32,7 @@ export default function Index() {
         navigate("/write/thumbnail");
       }}
       buttonText={"다음"}
+      closeAction={closeAction}
     >
       <div className="flex-1 h-full p-3">
         <div className="mb-5">

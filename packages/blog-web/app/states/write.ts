@@ -57,6 +57,20 @@ export const writeState = sangte(initialState, (prev) => ({
     prev.thumnailPath = "";
     prev.form.thumbnailId = null;
   },
+  reset() {
+    prev = {
+      form: {
+        postId: undefined,
+        title: "",
+        tags: [],
+        content: "",
+        display: 1,
+        thumbnailId: null,
+      },
+      thumnailPath: "",
+      error: undefined,
+    };
+  },
 }));
 
 export function useWriteActions() {
