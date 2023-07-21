@@ -30,7 +30,7 @@ function Edit() {
   const navigate = useNavigate();
   const actions = useWriteActions();
 
-  const { form, onChange, onChangeContent } = useWrite();
+  const { form, onChange, onChangeContent, closeAction } = useWrite();
 
   useEffect(() => {
     if (!data) return;
@@ -56,6 +56,7 @@ function Edit() {
         navigate(`/write/${data.title}/edit/thumbnail`);
       }}
       buttonText={"다음"}
+      closeAction={closeAction}
     >
       <div className="flex-1 h-full p-3">
         <div className="mb-5">
