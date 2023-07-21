@@ -16,7 +16,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://blog.kwkang.dev', 'https://kwkang.net'],
+    origin: [
+      'http://localhost:3000',
+      'https://blog.kwkang.dev',
+      'https://kwkang.net',
+      'https://www.kwkang.net',
+    ],
     credentials: true,
   })
 );
