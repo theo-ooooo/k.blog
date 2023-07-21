@@ -1,6 +1,6 @@
 import { type Response } from 'express';
 
-const domains = process.env.ENVIRONMENT === 'production' ? ['kwkang.net'] : [undefined];
+const domains = [undefined];
 
 export const setTokenCookies = (
   res: Response,
