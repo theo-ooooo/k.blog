@@ -49,7 +49,7 @@
         },
         {
           "name": "THUMBNAIL_IMAGE_CDN_URL",
-          "value": "https://images.kwkang.dev"
+          "value": "https://images.kwkang.net"
         }
       ],
       "resourceRequirements": null,
